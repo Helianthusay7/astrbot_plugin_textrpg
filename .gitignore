@@ -1,0 +1,65 @@
+# ============================================================
+# astrbot_plugin_textrpg —— 提交安全白名单
+#
+# 原则：仓库里只放「插件代码 + 文档 + 内置素材」。
+# 一切运行期数据、存档、备份、密钥都不进仓库。
+# ============================================================
+
+# ---- 1. 运行期数据（★ 含 AstrBot 面板密码哈希，绝对不能传）----
+data/
+plugin_data/
+*.db
+*.db-shm
+*.db-wal
+*.lock
+
+# ---- 2. 玩家存档（含真实 QQ 号 / 群号，属个人信息）----
+players.json
+activated_groups.json
+vip.json
+avatars/
+_imgtest/
+
+# ---- 3. 测试夹具 ----
+_testdata*/
+testdata/
+
+# ---- 4. 本地备份（体积大且是历史垃圾）----
+*.bak
+*.bak_*
+*.bak.*
+*.orig
+*.rej
+*~
+*.tmp
+
+# ---- 5. 部署产物 / 日志 ----
+*.log
+*.tar.gz
+*.zip
+astrbot_startup.log
+
+# ---- 6. Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ---- 7. 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 8. 凭据（双保险，正常情况下不该存在）----
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials.json

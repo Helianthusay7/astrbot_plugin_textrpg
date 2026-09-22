@@ -1,0 +1,124 @@
+{
+  "master_qq_list": {
+    "description": "主人 QQ 列表",
+    "type": "list",
+    "hint": "这些 QQ 号拥有全部权限：可在群里发送「激活」启用本群，可执行重置。建议填你自己的号。",
+    "default": [
+      "3455845639"
+    ]
+  },
+  "group_whitelist_mode": {
+    "description": "生效范围",
+    "type": "string",
+    "hint": "whitelist=只有已激活的群才响应（推荐）；private=仅私聊，任何群都不响应；all=所有群都响应（危险，容易被刷屏）。填错会退回 whitelist。",
+    "default": "whitelist"
+  },
+  "enabled_groups": {
+    "description": "启用群列表（可选）",
+    "type": "list",
+    "hint": "一般留空即可——直接在群里发「激活」更方便。这里填的群号会跳过激活步骤直接生效，适合固定群。支持逗号、空格或换行分隔。",
+    "default": []
+  },
+  "activate_command": {
+    "description": "群激活口令",
+    "type": "string",
+    "hint": "主人在群里发送这句话即可激活本群。默认「激活」。改成别的词可避免误触发。",
+    "default": "激活"
+  },
+  "reset_admin_only": {
+    "description": "重置指令仅限主人",
+    "type": "bool",
+    "hint": "开启后只有主人能执行重置。关闭则群管理员也能重置本群——不建议。",
+    "default": true
+  },
+  "battle_cooldown": {
+    "description": "历练冷却（秒）",
+    "type": "float",
+    "hint": "同一玩家两次历练之间的最小间隔，防群内刷屏。默认 300 秒（5 分钟）。",
+    "default": 300.0
+  },
+  "cultivate_cooldown": {
+    "description": "修炼冷却（秒）",
+    "type": "float",
+    "hint": "/修炼 是主动打坐，一次给少量修为。默认 300 秒（5 分钟）。",
+    "default": 300.0
+  },
+  "seclusion_cooldown": {
+    "description": "闭关冷却（秒）",
+    "type": "float",
+    "hint": "/闭关 结算后的冷却。闭关本身可挂机最长 8 小时。默认 3600 秒（1 小时）。",
+    "default": 3600.0
+  },
+  "explore_cooldown": {
+    "description": "探索冷却（秒）",
+    "type": "float",
+    "hint": "/探索 结算后的冷却。探索可挂机 30 分钟~8 小时，产出修为与秘典残页。默认 1800 秒（30 分钟）。",
+    "default": 1800.0
+  },
+  "enable_train": {
+    "description": "启用修炼 / 闭关 / 探索",
+    "type": "bool",
+    "hint": "关闭后 /修炼 /闭关 /探索 指令将提示功能未开放。",
+    "default": true
+  },
+  "max_inventory": {
+    "description": "背包容量上限",
+    "type": "int",
+    "hint": "单个玩家可持有的物品种类数上限。",
+    "default": 50
+  },
+  "ranking_size": {
+    "description": "排行榜显示人数",
+    "type": "int",
+    "hint": "/排行榜 显示的玩家数量。",
+    "default": 10
+  },
+  "anti_ban_enable": {
+    "description": "启用防封节流",
+    "type": "bool",
+    "hint": "关闭后消息立即返回、不再分段。仅调试时关闭——秒回是明显的机器人特征。",
+    "default": true
+  },
+  "reply_delay_range": {
+    "description": "回复随机延迟（秒）",
+    "type": "list",
+    "hint": "形如 [0.4, 1.6]。模拟人类看到消息后的思考与打字时间，避免秒回。",
+    "default": [
+      0.4,
+      1.6
+    ]
+  },
+  "max_chunk_chars": {
+    "description": "单条消息最大字符数",
+    "type": "int",
+    "hint": "超过这个长度的回复会自动分段发送。人不会一次发几百字的整齐文本。注意：/属性 面板不受此限制，它整块发送（玩家要看的是一整张面板，切碎反而难读）。",
+    "default": 180
+  },
+  "chunk_gap_range": {
+    "description": "分段间隔（秒）",
+    "type": "list",
+    "hint": "形如 [0.6, 1.3]。分段发送时每段之间的随机等待时间。",
+    "default": [
+      0.6,
+      1.3
+    ]
+  },
+  "rate_limit_count": {
+    "description": "频率熔断阈值（条）",
+    "type": "int",
+    "hint": "单个会话在窗口期内发送超过这么多条消息，就进入沉默期。别调太低——几个人同时玩就可能误伤正常玩家。默认 20。",
+    "default": 20
+  },
+  "rate_limit_window": {
+    "description": "频率统计窗口（秒）",
+    "type": "float",
+    "hint": "与上一项配合：窗口内超过阈值即熔断。默认 60 秒。",
+    "default": 60.0
+  },
+  "mute_duration": {
+    "description": "熔断沉默时长（秒）",
+    "type": "float",
+    "hint": "触发熔断后停止回复的时长。太久了玩家会以为机器人坏了。默认 20 秒。",
+    "default": 20.0
+  }
+}

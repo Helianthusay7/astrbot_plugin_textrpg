@@ -1,0 +1,4 @@
+# 本插件只使用 Python 标准库与 AstrBot 内置 API，
+# 不引入任何第三方依赖。
+#
+# 保留此文件是为了声明意图，并避免用户安装时出现 ModuleNotFoundError。

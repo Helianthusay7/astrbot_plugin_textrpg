@@ -1,0 +1,32 @@
+# 强制 LF 换行。
+#
+# 为什么必须锁死：
+#   Windows 上 Git 默认 autocrlf=true，会把文件转成 CRLF 再提交。
+#   install.sh 这种 shell 脚本一旦带 \r，到 Linux 上会报
+#   `bash: $'\r': command not found` —— 而且报错信息极具误导性，很难查。
+#   插件是部署到 Linux 服务器的，所以仓库里统一存 LF。
+#
+# 二进制文件不参与换行转换，否则会损坏。
+
+* text=auto eol=lf
+
+# 明确按文本处理、且用 LF
+*.py    text eol=lf
+*.sh    text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.txt   text eol=lf
+*.html  text eol=lf
+
+# 二进制，禁止转换
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.zip   binary
+*.gz    binary
+*.db    binary

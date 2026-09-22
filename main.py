@@ -2133,7 +2133,7 @@ class TextRPGPlugin(Star):
             event, qq, vip_mod.TIER_NORMAL, 1, "",
             usage=(
                 "用法：/激活vip <QQ号>\n"
-                "例：/激活vip 3455845639\n"
+                "例：/激活vip 12345678\n"
                 f"（普通 VIP {vip_mod.TIER_PRICES[vip_mod.TIER_NORMAL]} 元/月，"
                 f"默认 1 个月）"
             ),
@@ -2151,7 +2151,7 @@ class TextRPGPlugin(Star):
             event, qq, vip_mod.TIER_SUPREME, 1, "",
             usage=(
                 "用法：/至尊vip <QQ号>\n"
-                "例：/至尊vip 3455845639\n"
+                "例：/至尊vip 12345678\n"
                 f"（至尊 VIP {vip_mod.TIER_PRICES[vip_mod.TIER_SUPREME]} 元/月，"
                 f"默认 1 个月）"
             ),
@@ -2294,7 +2294,7 @@ class TextRPGPlugin(Star):
         if sub in ("开通", "发放", "赐福", "add"):
             usage = (
                 "用法：/vip 开通 <QQ> <月数> [normal|supreme] [备注]\n"
-                "例：/vip 开通 3455845639 3 supreme 微信0919\n"
+                "例：/vip 开通 12345678 3 supreme 微信0919\n"
                 "（只发 1 个月用 /激活vip 或 /至尊vip 更快）"
             )
             if len(parts) < 3:

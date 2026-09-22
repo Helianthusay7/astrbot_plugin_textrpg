@@ -1609,16 +1609,16 @@ async def main() -> None:
     check("初始无激活群", act.activated_groups() == [])
     check("未激活群判定为 False", not act.is_activated("123"))
 
-    fresh = await act.activate("123", by="3455845639", name="测试群")
+    fresh = await act.activate("123", by="12345678", name="测试群")
     check("首次激活返回 True", fresh is True)
     check("激活后判定为 True", act.is_activated("123"))
     check("已激活群出现在列表", act.activated_groups() == ["123"])
 
-    again = await act.activate("123", by="3455845639")
+    again = await act.activate("123", by="12345678")
     check("重复激活返回 False", again is False)
 
     info = act.info("123")
-    check("记录激活者", info is not None and info["by"] == "3455845639",
+    check("记录激活者", info is not None and info["by"] == "12345678",
           f"{info}")
     check("记录群名", info is not None and info["name"] == "测试群")
 
@@ -1656,7 +1656,7 @@ async def main() -> None:
             "chunk_gap_range": [0, 0],
             "rate_limit_count": 10000,
             "group_whitelist_mode": "whitelist",
-            "master_qq_list": "3455845639",
+            "master_qq_list": "12345678",
         },
     )
     # 让激活数据落在同一个目录
@@ -1664,13 +1664,13 @@ async def main() -> None:
     act_plugin.acl.activation = act_plugin.activation
 
     gid = "555001"
-    ev_owner = AstrMessageEvent(qq="3455845639", name="主人", group=gid)
+    ev_owner = AstrMessageEvent(qq="12345678", name="主人", group=gid)
 
     # 激活前：一切静默，且不建存档
     out = await run_cmd(act_plugin, "register", ev_owner)
     check("激活前报名被静默拦截", out == "", f"out={out!r}")
     check("激活前未创建存档",
-          act_plugin.store.get(gid, "3455845639") is None)
+          act_plugin.store.get(gid, "12345678") is None)
 
     # 主人发「激活」
     out = await run_cmd(act_plugin, "activate", ev_owner)
@@ -1685,7 +1685,7 @@ async def main() -> None:
     out = await fast_create(act_plugin, ev_owner, "主人角色")
     check("激活后报名成功", "建号完成" in out, out[:80])
     check("激活后创建了存档",
-          act_plugin.store.get(gid, "3455845639") is not None)
+          act_plugin.store.get(gid, "12345678") is not None)
 
     # 普通群友激活后也能玩
     ev_member = AstrMessageEvent(qq="888001", name="群友甲", group=gid)
@@ -1710,11 +1710,11 @@ async def main() -> None:
     out = await run_cmd(act_plugin, "profile", ev_owner)
     check("取消激活后指令静默", out == "", f"out={out!r}")
     check("取消激活后存档仍保留",
-          act_plugin.store.get(gid, "3455845639") is not None,
+          act_plugin.store.get(gid, "12345678") is not None,
           "取消激活把存档也删了（不该）")
 
     # 私聊里不能激活
-    ev_pm_owner = AstrMessageEvent(qq="3455845639", name="主人", group="")
+    ev_pm_owner = AstrMessageEvent(qq="12345678", name="主人", group="")
     out = await run_cmd(act_plugin, "activate", ev_pm_owner)
     check("私聊无法激活群", "需要在群聊" in out, out[:100])
 
@@ -1728,9 +1728,9 @@ async def main() -> None:
     # ----------------------------------------------------------------
     # check_invite 的纯逻辑
     inv_acl = acl_mod.AccessControl(
-        lambda k, d: {"master_qq_list": "3455845639"}.get(k, d)
+        lambda k, d: {"master_qq_list": "12345678"}.get(k, d)
     )
-    ok, _ = inv_acl.check_invite("3455845639")
+    ok, _ = inv_acl.check_invite("12345678")
     check("主人的邀请被接受", ok)
     ok, reason = inv_acl.check_invite("99999999")
     check("陌生人的邀请被拒绝", not ok, reason)
@@ -1738,7 +1738,7 @@ async def main() -> None:
 
     # 未配置主人时，谁都不能邀请
     no_master_acl = acl_mod.AccessControl(lambda k, d: {}.get(k, d))
-    ok, reason = no_master_acl.check_invite("3455845639")
+    ok, reason = no_master_acl.check_invite("12345678")
     check("未配置主人时拒绝所有邀请", not ok, reason)
 
     # 端到端：模拟一个假的 bot 记录调用
@@ -1778,13 +1778,13 @@ async def main() -> None:
             "chunk_gap_range": [0, 0],
             "rate_limit_count": 10000,
             "group_whitelist_mode": "all",
-            "master_qq_list": "3455845639",
+            "master_qq_list": "12345678",
         },
     )
 
     # 主人邀请 -> 同意
     bot1 = _FakeBot()
-    ev_inv1 = _ReqEvent("3455845639", "777001", bot1)
+    ev_inv1 = _ReqEvent("12345678", "777001", bot1)
     await inv_plugin.on_invite(ev_inv1)
     check("主人邀请 -> 调用了一次接口", len(bot1.calls) == 1, f"{bot1.calls}")
     check("主人邀请 -> approve=True",

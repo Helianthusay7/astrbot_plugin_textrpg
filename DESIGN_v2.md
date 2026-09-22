@@ -101,11 +101,11 @@ class CreationFlow:
 ```
 data/plugin_data/astrbot_plugin_textrpg/
   └── avatars/
-      ├── 1095489827_3455845639.png      # 群号_QQ号.png
+      ├── 1095489827_12345678.png      # 群号_QQ号.png
       └── ...
 ```
 
-存档只存相对路径 `avatars/1095489827_3455845639.png`。
+存档只存相对路径 `avatars/1095489827_12345678.png`。
 
 #### 数据模型变更
 

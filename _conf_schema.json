@@ -3,9 +3,7 @@
     "description": "主人 QQ 列表",
     "type": "list",
     "hint": "这些 QQ 号拥有全部权限：可在群里发送「激活」启用本群，可执行重置。建议填你自己的号。",
-    "default": [
-      "3455845639"
-    ]
+    "default": []
   },
   "group_whitelist_mode": {
     "description": "生效范围",
